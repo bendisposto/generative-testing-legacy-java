@@ -116,25 +116,9 @@ public class Game {
 	}
 
 	private String currentCategory() {
-		if (getCurrentPlayer().getPlace() == 0)
-			return "Pop";
-		if (getCurrentPlayer().getPlace() == 4)
-			return "Pop";
-		if (getCurrentPlayer().getPlace() == 8)
-			return "Pop";
-		if (getCurrentPlayer().getPlace() == 1)
-			return "Science";
-		if (getCurrentPlayer().getPlace() == 5)
-			return "Science";
-		if (getCurrentPlayer().getPlace() == 9)
-			return "Science";
-		if (getCurrentPlayer().getPlace() == 2)
-			return "Sports";
-		if (getCurrentPlayer().getPlace() == 6)
-			return "Sports";
-		if (getCurrentPlayer().getPlace() == 10)
-			return "Sports";
-		return "Rock";
+		String[] results = { "Pop", "Science", "Sports", "Rock" };
+		int place = getCurrentPlayer().getPlace() % results.length;
+		return results[place];
 	}
 
 	public boolean wasCorrectlyAnswered() {
