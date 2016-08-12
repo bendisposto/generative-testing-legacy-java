@@ -141,15 +141,17 @@ public class Game {
 
 	private boolean correctAnswer() {
 		getCurrentPlayer().correctAnswer();
+		printGold();
+		boolean winner = didPlayerWin();
+		nextPlayer();
+		return winner;
+	}
+
+	private void printGold() {
 		System.out.println(players.get(currentPlayer)
 				+ " now has "
 				+ getCurrentPlayer().getPurse()
 				+ " Gold Coins.");
-
-		boolean winner = didPlayerWin();
-		nextPlayer();
-
-		return winner;
 	}
 
 	public boolean wrongAnswer() {
