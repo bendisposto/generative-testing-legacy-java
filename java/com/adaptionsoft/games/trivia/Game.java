@@ -9,6 +9,10 @@ public class Game {
 	int currentPlayer = 0;
 
 	private Player getCurrentPlayer() {
+		// FIXME remove this, it is only present to simulate array in the
+		// original version
+		if (currentPlayer < 6 && players.size() <= currentPlayer)
+			return new Player("");
 		return players.get(currentPlayer);
 	}
 
