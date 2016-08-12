@@ -56,37 +56,52 @@ public class Game {
 	}
 
 	public void roll(int roll) {
-		System.out.println(players.get(currentPlayer) + " is the current player");
-		System.out.println("They have rolled a " + roll);
+		printCurrentPlayer();
+		printRoll(roll);
 
 		if (getCurrentPlayer().isInPenaltyBox()) {
-			if (roll % 2 != 0) {
+			if (isOdd(roll)) {
 				isGettingOutOfPenaltyBox = true;
-
-				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-				getCurrentPlayer().advance(roll);
-
-				System.out.println(players.get(currentPlayer)
-						+ "'s new location is "
-						+ getCurrentPlayer().getPlace());
-				System.out.println("The category is " + currentCategory());
-				askQuestion();
+				printIsGettingFree();
 			} else {
-				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+				printIsNotGettingFree();
 				isGettingOutOfPenaltyBox = false;
+				return;
 			}
 
-		} else {
-
-			getCurrentPlayer().advance(roll);
-
-			System.out.println(players.get(currentPlayer)
-					+ "'s new location is "
-					+ getCurrentPlayer().getPlace());
-			System.out.println("The category is " + currentCategory());
-			askQuestion();
 		}
+		advanceAndAskQuestion(roll);
 
+	}
+
+	private void printIsNotGettingFree() {
+		System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+	}
+
+	private void printIsGettingFree() {
+		System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
+	}
+
+	private void advanceAndAskQuestion(int roll) {
+		getCurrentPlayer().advance(roll);
+
+		System.out.println(players.get(currentPlayer)
+				+ "'s new location is "
+				+ getCurrentPlayer().getPlace());
+		System.out.println("The category is " + currentCategory());
+		askQuestion();
+	}
+
+	private boolean isOdd(int roll) {
+		return roll % 2 != 0;
+	}
+
+	private void printRoll(int roll) {
+		System.out.println("They have rolled a " + roll);
+	}
+
+	private void printCurrentPlayer() {
+		System.out.println(players.get(currentPlayer) + " is the current player");
 	}
 
 	private void askQuestion() {
