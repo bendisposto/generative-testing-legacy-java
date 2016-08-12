@@ -125,26 +125,27 @@ public class Game {
 	public boolean wasCorrectlyAnswered() {
 		boolean inPenaltyBox = getCurrentPlayer().isInPenaltyBox();
 		boolean result = true;
-		if (inPenaltyBox && !isGettingOutOfPenaltyBox) {
-			nextPlayer();
-		} else {
-			// FIXME remove this if-then-else, it is only here because of the
-			// typo in the original code
-			if (inPenaltyBox)
-				System.out.println("Answer was correct!!!!");
-			else
-				System.out.println("Answer was corrent!!!!");
+		if (!inPenaltyBox || isGettingOutOfPenaltyBox) {
+			printCorrectAnswer(inPenaltyBox);
 			result = correctAnswer();
 		}
+		nextPlayer();
 		return result;
+	}
+
+	private void printCorrectAnswer(boolean inPenaltyBox) {
+		// FIXME remove this if-then-else, it is only here because of the
+		// typo in the original code
+		if (inPenaltyBox)
+			System.out.println("Answer was correct!!!!");
+		else
+			System.out.println("Answer was corrent!!!!");
 	}
 
 	private boolean correctAnswer() {
 		getCurrentPlayer().correctAnswer();
 		printGold();
-		boolean winner = didPlayerWin();
-		nextPlayer();
-		return winner;
+		return didPlayerWin();
 	}
 
 	private void printGold() {
