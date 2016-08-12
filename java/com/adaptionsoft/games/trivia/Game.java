@@ -123,19 +123,20 @@ public class Game {
 	}
 
 	public boolean wasCorrectlyAnswered() {
-		if (getCurrentPlayer().isInPenaltyBox()) {
-			if (isGettingOutOfPenaltyBox) {
-				System.out.println("Answer was correct!!!!");
-				return correctAnswer();
-			} else {
-				nextPlayer();
-				return true;
-			}
-
+		boolean inPenaltyBox = getCurrentPlayer().isInPenaltyBox();
+		boolean result = true;
+		if (inPenaltyBox && !isGettingOutOfPenaltyBox) {
+			nextPlayer();
 		} else {
-			System.out.println("Answer was corrent!!!!");
-			return correctAnswer();
+			// FIXME remove this if-then-else, it is only here because of the
+			// typo in the original code
+			if (inPenaltyBox)
+				System.out.println("Answer was correct!!!!");
+			else
+				System.out.println("Answer was corrent!!!!");
+			result = correctAnswer();
 		}
+		return result;
 	}
 
 	private boolean correctAnswer() {
