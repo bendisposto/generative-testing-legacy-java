@@ -1,7 +1,9 @@
 package com.adaptionsoft.games.trivia;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Game {
 
@@ -16,20 +18,29 @@ public class Game {
 		return players.get(currentPlayer);
 	}
 
-	LinkedList popQuestions = new LinkedList();
-	LinkedList scienceQuestions = new LinkedList();
-	LinkedList sportsQuestions = new LinkedList();
-	LinkedList rockQuestions = new LinkedList();
+	Map<String, LinkedList<String>> questions = new HashMap<>();
 
 	boolean isGettingOutOfPenaltyBox;
 
 	public Game() {
+		initializeQuestions();
+	}
+
+	private void initializeQuestions() {
+		LinkedList<String> popQuestions = new LinkedList<>();
+		LinkedList<String> scienceQuestions = new LinkedList<>();
+		LinkedList<String> sportsQuestions = new LinkedList<>();
+		LinkedList<String> rockQuestions = new LinkedList<>();
 		for (int i = 0; i < 50; i++) {
 			popQuestions.addLast("Pop Question " + i);
 			scienceQuestions.addLast(("Science Question " + i));
 			sportsQuestions.addLast(("Sports Question " + i));
 			rockQuestions.addLast(createRockQuestion(i));
 		}
+		questions.put("Pop", popQuestions);
+		questions.put("Science", scienceQuestions);
+		questions.put("Sports", sportsQuestions);
+		questions.put("Rock", rockQuestions);
 	}
 
 	public String createRockQuestion(int index) {
@@ -105,14 +116,7 @@ public class Game {
 	}
 
 	private void askQuestion() {
-		if (currentCategory() == "Pop")
-			System.out.println(popQuestions.removeFirst());
-		if (currentCategory() == "Science")
-			System.out.println(scienceQuestions.removeFirst());
-		if (currentCategory() == "Sports")
-			System.out.println(sportsQuestions.removeFirst());
-		if (currentCategory() == "Rock")
-			System.out.println(rockQuestions.removeFirst());
+		System.out.println(questions.get(currentCategory()).removeFirst());
 	}
 
 	private String currentCategory() {
