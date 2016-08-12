@@ -7,4 +7,7 @@
   :dependencies [[org.clojure/clojure "1.9.0-alpha10"]
                  [org.clojure/test.check "0.9.0"]]
 
-  :profiles {:dev {:plugins [[com.jakemccrary/lein-test-refresh "0.16.0"]]}}              )
+  :profiles {:dev {:plugins [[com.jakemccrary/lein-test-refresh "0.16.0"]]
+                   :dependencies [[pjstadig/humane-test-output "0.8.1"]]
+                   :injections [(require 'pjstadig.humane-test-output)
+                     (pjstadig.humane-test-output/activate!)]}}              )
