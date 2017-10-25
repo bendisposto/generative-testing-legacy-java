@@ -1,6 +1,6 @@
 # Legacy Kata
 
-This is a prototypical implementation of an idea I had when doing the Trivia kata at the Dortmund Dojo. We used the original version of the trivia game as an oracle to verify that the refactored version of the game does the same thing as the original program.
+This is a prototypical implementation of an idea I had when doing the Trivia kata (https://github.com/caradojo/trivia) at the Dortmund Dojo (https://www.meetup.com/de-DE/Softwerkskammer-Ruhrgebiet/). We used the original version of the trivia game as an oracle to verify that the refactored version of the game does the same thing as the original program.
 
 We used a single test case (implied by the GameRuner class) and ran it with a bunch of different seeds. This leads to several system tests, but they all shared their context, in this case 3 players and a very specific sequence of method calls.
 
@@ -14,5 +14,5 @@ It came to me, that the exact same techique can be applied to our refactoring pr
 ```lein test``` runs the generated tests, comparing the original version of the program with the changed version
 
 ## License
-
-Copyright © 2016 Jens Bendisposto
+This project is licensed to under the MIT licence. See LICENCE for details.
+Copyright © 2016, Jens Bendisposto
